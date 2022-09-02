@@ -1,0 +1,220 @@
+cd ~/Dropbox/Documents/
+"tell vim to use login shell, which reads the ~/.bash_profile
+set shell=bash\ -l
+
+"default leader is \, we change it to comma
+let mapleader = "," " map leader to comma
+" enable AutoSave on Vim startu
+let g:auto_save = 1  
+"enable mouse support
+set mouse=a
+
+set nocompatible            " disable compatibility to old-time vi
+"set showmatch               " show matching brackets.
+set ignorecase              " case insensitive matching
+set hlsearch                " highlight search results
+set autoindent              " indent a new line the same amount as the line just typed
+"toggle paste and nopaste modes
+set pastetoggle=<F5>
+set number                  " add line numbers
+"show relative line number to current line
+"set relativenumber
+"Both absolute and relative line numbers are enabled by default, which produces “hybrid” line numbers. When entering insert mode, relative line numbers are turned off, leaving absolute line numbers turned on.
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != 'i' && !bufexists("[Command Line]") | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+:augroup END
+
+set wildmode=longest,list   " get bash-like tab completions
+"set cc=80                   " set an 80 column border for good coding style
+filetype plugin indent on   " allows auto-indenting depending on file type
+set tabstop=4               " number of columns occupied by a tab character
+set expandtab               " converts tabs to white space
+set shiftwidth=4            " width for autoindents
+set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+"disable automatic comment insertion
+:set formatoptions-=cro
+
+"set last 200 command histories in command mode, we can use up arrow to scroll
+"Note that history is not recorded just for the current editing session. It persists even when we quit and relaunch Vim
+set history=200
+
+
+"enable copying to clipboard
+"set clipboard=unnamed
+"see help with :h clipboard
+"set clipboard+=unnamedplus
+
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
+
+"used for command line completion
+set wildmenu
+set wildmode=longest:full,full
+
+" Always show current position
+set ruler
+
+" When searching try to be smart about cases
+set smartcase
+
+" For regular expressions turn magic on
+set magic
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"always show statusline (even with only single window)
+set laststatus=2
+
+"show full path of file in status line
+"set statusline+=%F
+
+"search as characters are entered
+set incsearch           
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+nnoremap <C-j> :tabprevious<CR>
+nnoremap <C-k> :tabnext<CR>
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+
+
+"nnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTree<CR>
+"nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <leader>f :NERDTreeFind<CR>
+
+
+"mapping for fuzzy finder
+nnoremap <C-p> :Files<CR>
+
+"set when clipboard set as unnamedplus
+"full pat
+"nnoremap <leader>c :let @+ = expand("%:p")<CR>
+
+"relative path
+"nnoremap <leader>cc :let @+ = expand("%")<CR>
+
+"just filename
+"nnoremap <leader>ccc  :let @+ = expand("%:t")<CR>
+
+"copy full path
+nnoremap <leader>c :let @" = expand("%:p")<CR>
+
+"relative path
+nnoremap <leader>cc :let @" = expand("%")<CR>
+
+"just filename
+nnoremap <leader>ccc  :let @" = expand("%:t")<CR>
+
+"set path for find to search file, ** matches all subdirectories as well
+set path=$PWD/**
+
+"change the cursor between Normal and Insert modes
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"set ttimeout
+"set ttimeoutlen=1
+"set ttyfast
+
+
+"switch cursor from block in insert mode in vim inside tmux
+if exists('$ITERM_PROFILE')
+  if exists('$TMUX')
+    let &t_SI = "\<Esc>[3 q"
+    let &t_EI = "\<Esc>[0 q"
+  else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
+end
+
+"copy selected text in visual mode and do 64 decode
+"vnoremap <leader>7 c<c-r>=system("base64 -w 0", @")<cr><esc>
+vnoremap <leader>6 c<c-r>=system('base64 --decode', @")<cr><esc>
+" 1. base64-encode(visual-selection) -> F2 -> encoded base64-string
+:vnoremap <F2> c<c-r>=system("base64", @")<cr><esc>
+
+" 2. base64-decode(visual-selection) -> F3 -> decoded string
+:vnoremap <F3> y:echo system("base64 -D", @")<cr> 
+
+nnoremap <leader>l :vertical resize +50<cr>
+nnoremap <leader>sm :vertical resize -50<cr>
+
+"map to filter command history like <Up> and <Down> for <C-p> and <C-n> in "command mode
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+"base64 encode and decode
+nnoremap <leader>e :% !base64<cr>
+nnoremap <leader>d :% !base64 -d<cr>
+
+"switch buffer
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+"map jk to Esc
+inoremap jk <Esc>
+
+" source $MYVIMRC reloads the saved $MYVIMRC
+:nmap <leader>s :source $MYVIMRC<cr>
+
+" opens $MYVIMRC for editing, or use :tabedit $MYVIMRC
+:nmap <leader>v :e $MYVIMRC<cr>
+
+"plugins
+call plug#begin('~/.vim/plugged')
+"Plug 'preservim/nerdtree'
+"Plug 'arcticicestudio/nord-vim'
+ Plug 'dracula/vim', { 'as': 'dracula' }
+ "Code and files fuzzy finder
+ "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+ "Plug 'junegunn/fzf.vim'
+ Plug '907th/vim-auto-save'
+ Plug 'romainl/vim-cool'
+call plug#end()
+
+colorscheme dracula
+
+"abbreviations
+:iab shebang #! /usr/bin/env bash
+:iab if if [[ ]]; then<CR><CR>fi
+:iab els  if [[ ]]; then<CR><CR>else<CR><CR><BS>fi
+:iab ei  if [[ ]]; then<CR><CR><BS>elif [[ ]]; then<CR><CR>fi
+:iab eie  if [[ ]]; then<CR><CR><BS>elif [[ ]]; then<CR><CR>else<CR><CR><BS>fi
