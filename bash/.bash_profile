@@ -1,3 +1,4 @@
+
 #set bash keybindings to vi mode
 set -o vi
 
@@ -8,8 +9,8 @@ shopt -s expand_aliases
 #export VISUAL=/usr/local/bin/nvim
 #export EDITOR=/usr/local/bin/nvim
 
-export VISUAL=/usr/bin/vim
-export EDITOR=/usr/bin/vim
+export VISUAL=/usr/local/bin/vim
+export EDITOR=/usr/local/bin/vim
 
 alias cls="clear; printf '\033[3J'"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home
@@ -19,6 +20,9 @@ alias kc="kubectl"
 alias ss="cd /Users/bdong/Dropbox/Documents/shell_scripts; ls -la"
 alias e="base64"
 alias d="base64 -d"
+
+alias vid="vi -S Session.vim"
+
 #alias vi="nvim"
 : '
 alias c_dev="cqlsh localhost 9040 -u plat_authn_dev_admin -p e2drMQLUTKFP9uAs"
