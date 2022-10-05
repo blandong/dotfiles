@@ -95,14 +95,22 @@ set laststatus=2
 #search as characters are entered
 set incsearch           
 
+#shellcheck
+#automatically open the quickfix window if ShellCheck found any problems with my shell script
+au QuickFixCmdPost [^l]* ++nested cwindow
+au QuickFixCmdPost    l* ++nested lwindow
+
 # Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>t<leader> :tabnext
-nnoremap <C-j> :tabprevious<CR>
-nnoremap <C-k> :tabnext<CR>
+#nnoremap <C-j> :tabprevious<CR>
+#nnoremap <C-k> :tabnext<CR>
+
+nnoremap <C-j> <C-w>h
+nnoremap <C-k> <C-w>l
 
 # Let 'tl' toggle between this and the last accessed tab
 g:lasttab = 1
@@ -121,7 +129,10 @@ map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 # Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
-
+#https://vi.stackexchange.com/questions/1942/how-to-execute-shell-commands-silently
+#make file executable and avoid the "Hit ENTER to continue" prompts  
+#<C-l> (or :redraw!) to refresh the screen when back to Vim.
+nnoremap <leader>x :silent !chmod +x %<cr><C-l> 
 
 #nnoremap <leader>n :NERDTreeFocus<CR>
 #nnoremap <C-n> :NERDTree<CR>
@@ -180,7 +191,7 @@ set ttyfast
 #  endif
 #end
 
-#select text to encode
+##select text to encode
 :vnoremap <leader>ee  :!base64<cr>
 
 #select text to decode 
@@ -189,6 +200,12 @@ set ttyfast
 #base64 encode and decode the whole file
 nnoremap <leader>e :% !base64<cr>
 nnoremap <leader>d :% !base64 -d<cr>
+
+
+
+#select xml to format
+:vnoremap <leader>x  :!xmllint --format -<cr>
+
 
 
 nnoremap <leader>vl :vertical resize +50<cr>
@@ -216,6 +233,15 @@ inoremap jk <Esc>
 # opens $MYVIMRC for editing, or use :tabedit $MYVIMRC
 :nmap <leader>v :e $MYVIMRC<cr>
 
+#map ,n in terminal mode to return to terminal normal mode
+:tnoremap <leader>n <C-w>N
+:tnoremap <leader>p <C-w>"0
+
+#quickfix window mapping
+nnoremap ]q :cnext <cr>
+nnoremap [q :cprevious <cr>
+nnoremap ]l :lnext <cr>
+nnoremap [l :lprevious <cr>
 
 #plugins
 plug#begin('~/.vim/plugged')
@@ -233,7 +259,7 @@ colorscheme dracula
 
 #abbreviations
 :iab shebang #! /usr/bin/env bash
-:iab if if [[ ]]; then<CR><CR>fi
+:iab if if [[ ]]; then<CR><CR>fi<Esc>kklllli
 :iab els  if [[ ]]; then<CR><CR>else<CR><CR><BS>fi
 :iab ei  if [[ ]]; then<CR><CR><BS>elif [[ ]]; then<CR><CR>fi
 :iab eie  if [[ ]]; then<CR><CR><BS>elif [[ ]]; then<CR><CR>else<CR><CR><BS>fi
