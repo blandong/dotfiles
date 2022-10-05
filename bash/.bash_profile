@@ -17,11 +17,10 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Hom
 export PATH=$(find /Users/bdong/Dropbox/Documents/shell_scripts -type d -maxdepth 1 | paste -sd ":" -):/usr/local/opt/curl/bin:/Users/bdong/.jenv/bin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH:/usr/local/Cellar/apache-cassandra/3.11/bin:/Users/bdong/apps/instantclient_19_8/
 
 alias kc="kubectl"
-alias ss="cd /Users/bdong/Dropbox/Documents/shell_scripts; ls -la"
-alias e="base64"
-alias d="base64 -d"
+alias ss="cd /Users/bdong/Dropbox/Documents/shell_scripts"
 
 alias vid="vi -S Session.vim"
+alias ll="ls -la"
 
 #alias vi="nvim"
 : '
