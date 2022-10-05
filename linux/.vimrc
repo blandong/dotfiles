@@ -54,6 +54,8 @@ set incsearch
 
 map <leader>ss :setlocal spell!<cr>
 
+nnoremap <leader>x :silent !chmod +x %<cr><C-l> 
+
 nnoremap <leader>yy "+yy
 vnoremap <leader>y "+y
 
