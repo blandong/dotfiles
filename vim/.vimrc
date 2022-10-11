@@ -5,10 +5,10 @@ cd ~/Dropbox/Documents/
 set shell=bash\ -l
 
 #default leader is \, we change it to comma
-g:mapleader = ',' # map leader to comma
+g:mapleader = ' ' # map leader 
 
 #always change pwd while browsing around with netrw
-g:netrw_keepdir = 0
+#g:netrw_keepdir = 0
 
 #make backspace to delete the text when hit in insert mode - https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode
 set backspace=indent,eol,start
@@ -262,7 +262,7 @@ colorscheme dracula
 
 #abbreviations
 :iab shebang #! /usr/bin/env bash
-:iab iff if [[ ]]; then<CR><CR>fi<Esc>kklllli
+:iab ii if [[ ]]; then<CR><CR>fi<Esc>kklllli
 :iab els  if [[ ]]; then<CR><CR>else<CR><CR><BS>fi
 :iab ei  if [[ ]]; then<CR><CR><BS>elif [[ ]]; then<CR><CR>fi
 :iab eie  if [[ ]]; then<CR><CR><BS>elif [[ ]]; then<CR><CR>else<CR><CR><BS>fi

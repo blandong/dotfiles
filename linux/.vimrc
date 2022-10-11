@@ -5,7 +5,7 @@ set shell=bash\ -l
 let g:netrw_keepdir = 0
 
 "default leader is \, we change it to comma
-let mapleader = "," " map leader to comma
+let mapleader = " " " map leader to comma
 
 set backspace=indent,eol,start
 
