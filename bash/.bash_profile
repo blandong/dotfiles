@@ -22,6 +22,13 @@ alias ss="cd /Users/bdong/Dropbox/Documents/shell_scripts"
 alias vid="vi -S Session.vim"
 alias ll="ls -la"
 
+alias gt="git tag"
+alias gs="git status"
+alias gb="git branch"
+alias ga="git add"
+alias gps="git push"
+alias gcm="git commit"
+
 #alias vi="nvim"
 : '
 alias c_dev="cqlsh localhost 9040 -u plat_authn_dev_admin -p e2drMQLUTKFP9uAs"
