@@ -69,7 +69,12 @@ let &t_SI = "\<Esc>[6 q"
 "let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
+nmap s <Plug>(easymotion-s)
+"two characters search
+nmap S <Plug>(easymotion-s2)
+
 call plug#begin()
 Plug '907th/vim-auto-save'
 Plug 'romainl/vim-cool'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
