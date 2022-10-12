@@ -246,6 +246,10 @@ nnoremap [q :cprevious <cr>
 nnoremap ]l :lnext <cr>
 nnoremap [l :lprevious <cr>
 
+nmap s <Plug>(easymotion-s)
+#two characters search
+nmap S <Plug>(easymotion-s2)
+
 #plugins
 plug#begin('~/.vim/plugged')    
 #Plug 'preservim/nerdtree'
@@ -256,6 +260,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 #Plug 'junegunn/fzf.vim'
 Plug '907th/vim-auto-save'
 Plug 'romainl/vim-cool'
+Plug 'easymotion/vim-easymotion'
 plug#end()
 
 colorscheme dracula
