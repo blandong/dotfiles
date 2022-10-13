@@ -24,3 +24,10 @@ alias jmeter_result="cd /covisint/loadtesting/projects/platform/ServiceBasedTest
 alias ss="cd ~/ss;ll"
 test -e ~/.iterm2_shell_integration.bash && source ~/.iterm2_shell_integration.bash || true
 
+alias gt="git tag"
+alias gs="git status"
+alias gb="git branch"
+alias ga="git add"
+alias gps="git push"
+alias gcm="git commit"
+
