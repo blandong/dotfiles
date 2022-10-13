@@ -240,6 +240,10 @@ inoremap jk <Esc>
 :tnoremap <leader>n <C-w>N
 :tnoremap <leader>p <C-w>"0
 
+#https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
+#cnoremap w!! w !sudo tee > /dev/null %
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 #quickfix window mapping
 nnoremap ]q :cnext <cr>
 nnoremap [q :cprevious <cr>
