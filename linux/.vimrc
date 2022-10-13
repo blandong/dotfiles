@@ -51,6 +51,9 @@ set ffs=unix,dos,mac
 set laststatus=2
 set incsearch 
 
+"cnoremap w!! w !sudo tee > /dev/null %
+
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 map <leader>ss :setlocal spell!<cr>
 
