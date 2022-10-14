@@ -2,7 +2,13 @@
 set shell=bash\ -l
 
 "always change pwd while browsing around with netrw
-let g:netrw_keepdir = 0
+"let g:netrw_keepdir = 0
+
+":h sessionoptions 
+set sessionoptions-=globals
+set sessionoptions-=localoptions
+set sessionoptions-=options
+
 
 "default leader is \, we change it to comma
 let mapleader = " " " map leader to comma
@@ -71,6 +77,8 @@ inoremap jk <Esc>
 let &t_SI = "\<Esc>[6 q"
 "let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
+
+let g:EasyMotion_do_mapping = 0 
 
 nmap s <Plug>(easymotion-s)
 "two characters search
