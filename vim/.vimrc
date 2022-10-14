@@ -4,6 +4,11 @@ cd ~/Dropbox/Documents/
 #tell vim to use login shell, which reads the ~/.bash_profile
 set shell=bash\ -l
 
+#:h sessionoptions 
+set sessionoptions-=globals
+set sessionoptions-=localoptions
+set sessionoptions-=options
+
 #default leader is \, we change it to comma
 g:mapleader = ' ' # map leader 
 
@@ -249,6 +254,9 @@ nnoremap ]q :cnext <cr>
 nnoremap [q :cprevious <cr>
 nnoremap ]l :lnext <cr>
 nnoremap [l :lprevious <cr>
+
+# Disable default easymotion mappings
+g:EasyMotion_do_mapping = 0 
 
 nmap s <Plug>(easymotion-s)
 #two characters search
