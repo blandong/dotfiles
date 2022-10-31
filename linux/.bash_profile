@@ -1,6 +1,6 @@
 # .bash_profile
 #set bash keybindings to vi mode
-set -o vi
+#set -o vi
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
