@@ -14,6 +14,9 @@ g:mapleader = ' ' # map leader
 
 #always change pwd while browsing around with netrw
 #g:netrw_keepdir = 0
+#sort directory/files by time in DESC order by default
+g:netrw_sort_by = "time"
+g:netrw_sort_direction = "reverse"
 
 #make backspace to delete the text when hit in insert mode - https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode
 set backspace=indent,eol,start
@@ -117,9 +120,6 @@ map <leader>t<leader> :tabnext
 #nnoremap <C-j> :tabprevious<CR>
 #nnoremap <C-k> :tabnext<CR>
 
-nnoremap <C-j> <C-w>h
-nnoremap <C-k> <C-w>l
-
 # Let 'tl' toggle between this and the last accessed tab
 g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
@@ -166,6 +166,12 @@ nnoremap <leader>yy "+yy
 
 #copy selected text to system clipboard
 vnoremap <leader>y "+y
+
+#cut current line to system clipboard
+nnoremap <leader>dd "+dd
+
+#cut selected text to system clipboard
+vnoremap <leader>d "+d
 
 #copy full path
 nnoremap <leader>f :let @* = expand("%:p")<CR>
@@ -232,6 +238,9 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
+#map to type number to buffer after ls command 
+:nnoremap <leader>ls :ls<cr>:b
+#
 #map jk to Esc
 inoremap jk <Esc>
 
