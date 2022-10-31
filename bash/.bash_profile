@@ -1,6 +1,7 @@
 
 #set bash keybindings to vi mode
 set -o vi
+bind '"jk":vi-movement-mode'
 
 #used by vim to expand alias set here
 shopt -s expand_aliases  
@@ -18,6 +19,10 @@ export PATH=$(find /Users/bdong/Dropbox/Documents/shell_scripts -type d -maxdept
 
 alias kc="kubectl"
 alias ss="cd /Users/bdong/Dropbox/Documents/shell_scripts"
+#https://stackoverflow.com/questions/17958567/how-to-make-an-alias-for-a-long-path
+#use cd $ss to cd to the /Users/bdong/Dropbox/Documents/shell_scripts
+export ss="/Users/bdong/Dropbox/Documents/shell_scripts"
+export doc="/Users/bdong/Dropbox/Documents"
 
 alias vid="vi -S Session.vim"
 alias ll="ls -la"
