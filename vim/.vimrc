@@ -1,16 +1,18 @@
 vim9script
 
-cd ~/Dropbox/Documents/
+#cd ~/Dropbox/Documents/
 #tell vim to use login shell, which reads the ~/.bash_profile
-set shell=bash\ -l
+#set shell=bash\ -l
+set shell=zsh\ -l
 
+set belloff=all
 #:h sessionoptions 
 set sessionoptions-=globals
 set sessionoptions-=localoptions
 set sessionoptions-=options
 
 #default leader is \, we change it to comma
-g:mapleader = ' ' # map leader 
+g:mapleader = "," # map leader 
 
 #always change pwd while browsing around with netrw
 #g:netrw_keepdir = 0
@@ -34,6 +36,7 @@ set ignorecase              # case insensitive matching
 set smartcase
 set hlsearch                # highlight search results
 set autoindent              # indent a new line the same amount as the line just typed
+
 #toggle paste and nopaste modes
 set pastetoggle=<F5>
 set number                  # add line numbers
@@ -271,6 +274,9 @@ nmap s <Plug>(easymotion-s)
 #two characters search
 nmap S <Plug>(easymotion-s2)
 
+#highlight yanked text in milliseconds
+g:highlightedyank_highlight_duration = 1000
+
 #plugins
 plug#begin('~/.vim/plugged')    
 #Plug 'preservim/nerdtree'
@@ -282,6 +288,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug '907th/vim-auto-save'
 Plug 'romainl/vim-cool'
 Plug 'easymotion/vim-easymotion'
+Plug 'machakann/vim-highlightedyank'
 plug#end()
 
 colorscheme dracula
