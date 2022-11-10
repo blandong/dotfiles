@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# e.g. COMPLETION_WAITING_sOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(zsh-vi-mode)
+plugins=(zsh-autosuggestions z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -177,3 +177,5 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 #bindkey -e -r '^[x'
 #bindkey -a -r ':'
 
+#bind ,l to autosuggest-accept of zsh-autosuggestions plugin
+bindkey ',l' autosuggest-accept
