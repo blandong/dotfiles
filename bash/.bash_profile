@@ -13,6 +13,7 @@ shopt -s expand_aliases
 export VISUAL=/usr/local/bin/vim
 export EDITOR=/usr/local/bin/vim
 
+
 alias cls="clear; printf '\033[3J'"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home
 export PATH=$(find /Users/bdong/Dropbox/Documents/shell_scripts -type d -maxdepth 1 | paste -sd ":" -):/usr/local/opt/curl/bin:/Users/bdong/.jenv/bin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH:/usr/local/Cellar/apache-cassandra/3.11/bin:/Users/bdong/apps/instantclient_19_8/
@@ -25,6 +26,8 @@ export ss="/Users/bdong/Dropbox/Documents/shell_scripts"
 export doc="/Users/bdong/Dropbox/Documents"
 
 alias vid="vi -S Session.vim"
+alias vit="vim -c ':term ++curwin'"
+
 alias ll="ls -la"
 
 alias gt="git tag"
@@ -103,3 +106,4 @@ alias py="$(pyenv which python)"
 alias pip="$(pyenv which pip)"
 '
 test -e ~/.iterm2_shell_integration.bash && source ~/.iterm2_shell_integration.bash || true
+
