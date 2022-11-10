@@ -11,7 +11,7 @@ set sessionoptions-=options
 
 
 "default leader is \, we change it to comma
-let mapleader = " " " map leader to comma
+let mapleader = "," " map leader to comma
 
 set backspace=indent,eol,start
 
