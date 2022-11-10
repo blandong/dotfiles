@@ -1,0 +1,8 @@
+
+:set smartcase
+:set hlsearch
+:set incsearch
+:set number
+:set cursorline
+:set nolist
+inoremap jk <Esc>
