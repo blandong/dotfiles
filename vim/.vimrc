@@ -34,9 +34,10 @@ set nocompatible            # disable compatibility to old-time vi
 set ignorecase              # case insensitive matching
 # When searching try to be smart about cases
 set smartcase
-set hlsearch                # highlight search results
+#set nowrapscan             # do not wrap around with search
+#set hlsearch                # highlight search results
+nnoremap <leader>nh :set hls!<CR>
 set autoindent              # indent a new line the same amount as the line just typed
-
 #toggle paste and nopaste modes
 set pastetoggle=<F5>
 set number                  # add line numbers
@@ -101,7 +102,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 #always show statusline (even with only single window)
-set laststatus=2
+#set laststatus=0
 
 #show full path of file in status line
 #set statusline+=%F
@@ -115,13 +116,18 @@ au QuickFixCmdPost [^l]* ++nested cwindow
 au QuickFixCmdPost    l* ++nested lwindow
 
 # Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>to :tabonly<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>tm :tabmove
+nnoremap <leader>t<leader> :tabnext
 #nnoremap <C-j> :tabprevious<CR>
 #nnoremap <C-k> :tabnext<CR>
+
+tnoremap <leader>tn <C-w>:tab ter<cr>
+tnoremap <leader>to <C-w>:tabonly!<cr>
+tnoremap <leader>tc <C-w>:tabclose!<cr>
+
 
 # Let 'tl' toggle between this and the last accessed tab
 g:lasttab = 1
@@ -164,16 +170,20 @@ nnoremap <leader>x :silent !chmod +x %<cr><C-l>
 #just filename
 #nnoremap <leader>ccc  :let @+ = expand("%:t")<CR>
 
+#copy selected text to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
 #copy current line to system clipboard
 nnoremap <leader>yy "+yy
 
-#copy selected text to system clipboard
-vnoremap <leader>y "+y
+nnoremap <leader><leader>y :let @* = @"<CR>
 
 #cut current line to system clipboard
 nnoremap <leader>dd "+dd
 
 #cut selected text to system clipboard
+nnoremap <leader>d "+d
 vnoremap <leader>d "+d
 
 #copy full path
@@ -215,8 +225,8 @@ set ttyfast
 :vnoremap <leader>dd :!base64 -d<cr> 
 
 #base64 encode and decode the whole file
-nnoremap <leader>e :% !base64<cr>
-nnoremap <leader>d :% !base64 -d<cr>
+nnoremap <leader>en :% !base64<cr>
+nnoremap <leader>de :% !base64 -d<cr>
 
 
 
@@ -243,9 +253,12 @@ nnoremap <silent> ]B :blast<CR>
 
 #map to type number to buffer after ls command 
 :nnoremap <leader>ls :ls<cr>:b
-#
+
 #map jk to Esc
 inoremap jk <Esc>
+
+nnoremap <leader>o o<ESC>k 
+nnoremap <leader>O O<ESC>j 
 
 # source $MYVIMRC reloads the saved $MYVIMRC
 :nmap <leader>s :source $MYVIMRC<cr>
@@ -256,10 +269,19 @@ inoremap jk <Esc>
 #map ,n in terminal mode to return to terminal normal mode
 :tnoremap <leader>n <C-w>N
 :tnoremap <leader>p <C-w>"0
+#enter command mode from terminal mode
+# :tnoremap <leader>: <C-w>:
+:tnoremap <leader>: <C-w>:
+
+:tnoremap <leader>gt <C-w>gt
+:tnoremap <leader>gT <C-w>gT
 
 #https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
 #cnoremap w!! w !sudo tee > /dev/null %
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+#delete to end of line
+cnoremap <C-k> <C-\>estrpart(getcmdline(),0,getcmdpos()-1)<CR>
 
 #quickfix window mapping
 nnoremap ]q :cnext <cr>
@@ -276,7 +298,7 @@ nmap S <Plug>(easymotion-s2)
 
 #highlight yanked text in milliseconds
 g:highlightedyank_highlight_duration = 1000
-
+   
 #plugins
 plug#begin('~/.vim/plugged')    
 #Plug 'preservim/nerdtree'
@@ -289,9 +311,20 @@ Plug '907th/vim-auto-save'
 Plug 'romainl/vim-cool'
 Plug 'easymotion/vim-easymotion'
 Plug 'machakann/vim-highlightedyank'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'dbakker/vim-paragraph-motion'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 plug#end()
 
 colorscheme dracula
+
+#def Eatchar(pat: string): string
+#  var c = nr2char(getchar(0))
+#  return (c =~ pat) ? '' : c
+#enddef
+
 
 #abbreviations
 :iab shebang #! /usr/bin/env bash

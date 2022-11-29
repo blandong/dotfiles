@@ -1,8 +1,11 @@
 
 :set smartcase
+:set ignorecase
 :set hlsearch
 :set incsearch
 :set number
 :set cursorline
 :set nolist
+:set nospell
+:set clipboard=
 inoremap jk <Esc>

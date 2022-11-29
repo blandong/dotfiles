@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions z)
+plugins=(zsh-autosuggestions z zsh-history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -136,7 +136,9 @@ alias gs="git status"
 alias gb="git branch"
 alias ga="git add"
 alias gps="git push"
-alias gcm="git commit"
+alias gcm="git commit -m"
+alias gcp="git cherry-pick"
+alias gdt="git difftool"
 
 test -e /Users/bdong/.iterm2_shell_integration.zsh && source /Users/bdong/.iterm2_shell_integration.zsh || true
 
@@ -179,3 +181,25 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 
 #bind ,l to autosuggest-accept of zsh-autosuggestions plugin
 bindkey ',l' autosuggest-accept
+#https://github.com/zsh-users/zsh-autosuggestions/issues/265
+bindkey ',w' vi-forward-word
+
+
+#substring history
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+#prevent duplicate history when using up/down arrow to see history command
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+
+# eval $(thefuck --alias)
+# You can use whatever you want as an alias, like for Mondays:
+# eval $(thefuck --alias FUCK)
+
