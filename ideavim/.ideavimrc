@@ -1,0 +1,173 @@
+"" Source your .vimrc
+"source ~/.vimrc
+
+let mapleader=","
+
+"set bell sound off
+set visualbell
+set noerrorbells
+
+"make backspace to delete the text when hit in insert mode - https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode
+set backspace=indent,eol,start
+
+" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+set showmode
+" Do incremental searching.
+"set incsearch
+set relativenumber
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+""" Idea specific settings ------------------
+set ideajoin
+set idearefactormode=keep
+
+set nocompatible            " disable compatibility to old-time vi
+"set showmatch               " show matching brackets.
+set ignorecase              " case insensitive matching
+" When searching try to be smart about cases
+set smartcase
+"set hlsearch                " highlight search results
+
+"toggle highlight
+nnoremap <leader>nh :set hls!<CR> 
+set autoindent              " indent a new line the same amount as the line just typed
+
+"toggle paste and nopaste modes
+set pastetoggle=<F5>
+set number                  " add line numbers
+"show relative line number to current line
+"set relativenumber
+"Both absolute and relative line numbers are enabled by default, which produces “hybrid” line numbers. When entering insert mode, relative line numbers are turned off, leaving absolute line numbers turned on.
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != 'i' && !bufexists("[Command Line]") | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+:augroup END
+
+"set cc=80                   " set an 80 column border for good coding style
+filetype plugin indent on   " allows auto-indenting depending on file type
+set tabstop=4               " number of columns occupied by a tab character
+set expandtab               " converts tabs to white space
+set shiftwidth=4            " width for autoindents
+set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
+"disable automatic comment insertion
+:set formatoptions-=cro
+
+"set last 200 command histories in command mode, we can use up arrow to scroll
+"Note that history is not recorded just for the current editing session. It persists even when we quit and relaunch Vim
+set history=200
+
+"highlight current line
+set cursorline
+
+"enable copying to clipboard
+"set clipboard=unnamed
+"see help with :h clipboard
+"set clipboard+=unnamedplus
+
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
+
+"used for command line completion
+"set wildmenu
+
+"wildoptions to replace the wildmenu, now it is using the vertical popup to show matches
+set wildmenu wildoptions=pum
+set wildmode=longest:full,full
+
+" Always show current position
+set ruler
+
+
+" For regular expressions turn magic on
+set magic
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"always show statusline (even with only single window)
+set laststatus=2
+
+"show full path of file in status line
+"set statusline+=%F
+
+"search as characters are entered
+set incsearch
+
+"map jk to Esc
+inoremap jk <Esc>
+
+"copy current line to system clipboard
+nnoremap <leader>yy "+yy
+"copy selected text to system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader><leader>y :let @* = @"<CR>
+
+"cut current line to system clipboard
+nnoremap <leader>dd "+dd
+"cut selected text to system clipboard
+nnoremap <leader>d "+d
+vnoremap <leader>d "+d
+
+set NERDTree
+nnoremap <leader>nf :NERDTreeFind<cr>
+
+"map to type number to buffer after ls command
+":nnoremap <leadeols :ls<cr>:b
+
+nnoremap g; :action JumpToLastChange<Enter>
+nnoremap g, :action JumpToNextChange<Enter>
+nnoremap gd :action GotoImplementation<CR>
+nnoremap gD :action GotoDeclaration<CR>
+
+Plug 'easymotion/vim-easymotion'
+set easymotion
+map s <Plug>(easymotion-s)
+
+Plug 'machakann/vim-highlightedyank'
+Plug 'vim-matchit'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'dbakker/vim-paragraph-motion'
+Plug 'romainl/vim-cool'
+Plug 'tpope/vim-commentary'
+Plug 'svermeulen/vim-cutlass'
+Plug 'tpope/vim-surround'
+
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+noremap <leader>vs :action SplitVertically<cr>
+
+map <leader>z <Action>(ToggleDistractionFreeMode)
+"map <leader>mw <Action>(MergeAllWindowsAction)
+"" simulate right click inside current file
+map <leader>cm <Action>(ShowPopupMenu)
+map <leader>l <Action>(NextProjectWindow)
+map <leader>h <Action>(PreviousProjectWindow)
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc
