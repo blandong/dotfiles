@@ -25,6 +25,7 @@ set backspace=indent,eol,start
 
 # enable AutoSave on Vim startu
 g:auto_save = 1  
+nnoremap <C-k> gt
 
 #enable mouse support
 set mouse=a
@@ -35,12 +36,14 @@ set ignorecase              # case insensitive matching
 # When searching try to be smart about cases
 set smartcase
 #set nowrapscan             # do not wrap around with search
-#set hlsearch                # highlight search results
+set hlsearch                # highlight search results
+
 nnoremap <leader>nh :set hls!<CR>
 set autoindent              # indent a new line the same amount as the line just typed
 #toggle paste and nopaste modes
 set pastetoggle=<F5>
 set number                  # add line numbers
+set title
 #show relative line number to current line
 #set relativenumber
 #Both absolute and relative line numbers are enabled by default, which produces “hybrid” line numbers. When entering insert mode, relative line numbers are turned off, leaving absolute line numbers turned on.
@@ -116,17 +119,51 @@ au QuickFixCmdPost [^l]* ++nested cwindow
 au QuickFixCmdPost    l* ++nested lwindow
 
 # Useful mappings for managing tabs
-nnoremap <leader>tn :tabnew<cr>
-nnoremap <leader>to :tabonly<cr>
-nnoremap <leader>tc :tabclose<cr>
-nnoremap <leader>tm :tabmove
-nnoremap <leader>t<leader> :tabnext
-#nnoremap <C-j> :tabprevious<CR>
-#nnoremap <C-k> :tabnext<CR>
+# nnoremap <leader>tn :tabnew<cr>
+# nnoremap <leader>to :tabonly<cr>
+# nnoremap <leader>tc :tabclose<cr>
+# nnoremap <leader>tm :tabmove
+# nnoremap <leader>t<leader> :tabnext
+# nnoremap <C-j> :tabprevious<CR>
+# nnoremap <C-k> :tabnext<CR>
+# nnoremap <C-1> 1gT
+# nnoremap <C-9> :tablast<CR>
+# nnoremap <leader>tn :tab ter<cr>
+nnoremap <C-t> :tablast<cr><C-w>:tab ter<cr>
+# nnoremap <C-H> 1gT
+nnoremap <C-h> :tabfirst<CR>
+nnoremap <C-l> :tablast<CR>
+nnoremap <C-j> gT
+nnoremap <C-k> gt
+#close all tabs to the right
+# nnoremap <C-w> :.+1,$tabdo :tabc!<CR>
+nnoremap <C-[> :tabmove-1<CR>
+nnoremap <C-]> :tabmove+1<CR>
 
-tnoremap <leader>tn <C-w>:tab ter<cr>
-tnoremap <leader>to <C-w>:tabonly!<cr>
-tnoremap <leader>tc <C-w>:tabclose!<cr>
+# tnoremap <leader>tn <C-w>:tab ter<cr>
+# tnoremap <leader>to <C-w>:tabonly!<cr>
+# tnoremap <leader>tc <C-w>:tabclose!<cr>
+tnoremap <C-q> <C-w><C-c><cr>
+# :tnoremap <leader>gt <C-w>gt
+# :tnoremap <leader>gT <C-w>gT
+# tnoremap <C-1> <C-w>:tabfirst<CR>
+# tnoremap <C-9> <C-w>:tablast<CR>
+tnoremap <C-t> <C-w>:tablast<cr><C-w>:tab ter<cr>
+tnoremap <C-h> <C-w>:tabfirst<CR>
+tnoremap <C-l> <C-w>:tablast<CR>
+:tnoremap <C-j> <C-w>gT
+:tnoremap <C-k> <C-w>gt
+# tnoremap <C-w> <C-w>:.+1,$tabdo :tabc!<CR>
+tnoremap <C-[> <C-w>:tabmove-1<CR>
+tnoremap <C-]> <C-w>:tabmove+1<CR>
+
+
+#map ,n in terminal mode to return to terminal normal mode
+:tnoremap <leader>n <C-w>N
+:tnoremap <leader>p <C-w>"0
+#enter command mode from terminal mode
+# :tnoremap <leader>: <C-w>:
+:tnoremap <leader>: <C-w>:
 
 
 # Let 'tl' toggle between this and the last accessed tab
@@ -195,6 +232,9 @@ nnoremap <leader>ff :let @* = expand("%")<CR>
 #just filename
 nnoremap <leader>fff  :let @* = expand("%:t")<CR>
 
+#open file directory in Finder
+nnoremap <leader>r :!open %:h<Esc><Esc>
+
 #set path for find to search file, ** matches all subdirectories as well
 set path=$PWD/**
 
@@ -254,6 +294,9 @@ nnoremap <silent> ]B :blast<CR>
 #map to type number to buffer after ls command 
 :nnoremap <leader>ls :ls<cr>:b
 
+#display history files and type q, then type number to open the file
+:nnoremap <leader>h :browse oldfiles<CR>
+
 #map jk to Esc
 inoremap jk <Esc>
 
@@ -265,16 +308,6 @@ nnoremap <leader>O O<ESC>j
 
 # opens $MYVIMRC for editing, or use :tabedit $MYVIMRC
 :nmap <leader>v :e $MYVIMRC<cr>
-
-#map ,n in terminal mode to return to terminal normal mode
-:tnoremap <leader>n <C-w>N
-:tnoremap <leader>p <C-w>"0
-#enter command mode from terminal mode
-# :tnoremap <leader>: <C-w>:
-:tnoremap <leader>: <C-w>:
-
-:tnoremap <leader>gt <C-w>gt
-:tnoremap <leader>gT <C-w>gT
 
 #https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
 #cnoremap w!! w !sudo tee > /dev/null %
@@ -294,10 +327,10 @@ g:EasyMotion_do_mapping = 0
 
 nmap s <Plug>(easymotion-s)
 #two characters search
-nmap S <Plug>(easymotion-s2)
+# nmap S <Plug>(easymotion-s2)
 
 #highlight yanked text in milliseconds
-g:highlightedyank_highlight_duration = 1000
+g:highlightedyank_highlight_duration = 100
    
 #plugins
 plug#begin('~/.vim/plugged')    
@@ -311,6 +344,7 @@ Plug '907th/vim-auto-save'
 Plug 'romainl/vim-cool'
 Plug 'easymotion/vim-easymotion'
 Plug 'machakann/vim-highlightedyank'
+Plug 'chrisbra/matchit'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'dbakker/vim-paragraph-motion'
 Plug 'tpope/vim-commentary'

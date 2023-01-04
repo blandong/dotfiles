@@ -1,4 +1,10 @@
+"install optional plugin -
+"https://vrapper.sourceforge.net/documentation/?topic=optional_plugins#exchange
+"https://github.com/vrapper/vrapper/issues/649
+"https://vrapper.sourceforge.net/update-site/stable
 
+" map leader to comma
+let mapleader = ","
 :set smartcase
 :set ignorecase
 :set hlsearch
@@ -9,3 +15,33 @@
 :set nospell
 :set clipboard=
 inoremap jk <Esc>
+nnoremap <leader>nh :set hls!<CR>
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+#copy current line to system clipboard
+nnoremap <leader>yy "+yy
+
+nnoremap <leader>o o<ESC>k
+nnoremap <leader>O O<ESC>j
+
+"mapping for sneak plugin
+nmap s <Plug>(sneak_s)
+nmap S <Plug>(sneak_S)
+nmap ; <Plug>(sneak-next)
+nmap , <Plug>(sneak-prev)
+vmap s <Plug>(sneak_s)
+vmap Z <Plug>(sneak_S)
+vmap ; <Plug>(sneak-next)
+vmap , <Plug>(sneak-prev)
+nmap f <Plug>(sneak_f)
+nmap F <Plug>(sneak_F)
+nmap t <Plug>(sneak_t)
+nmap T <Plug>(sneak_T)
+vmap f <Plug>(sneak_f)
+vmap F <Plug>(sneak_F)
+vmap t <Plug>(sneak_t)
+vmap T <Plug>(sneak_T)
+omap z <Plug>(sneak_s)
+omap Z <Plug>(sneak_S)

@@ -30,7 +30,7 @@ set nocompatible            " disable compatibility to old-time vi
 set ignorecase              " case insensitive matching
 " When searching try to be smart about cases
 set smartcase
-"set hlsearch                " highlight search results
+set hlsearch                " highlight search results
 
 "toggle highlight
 nnoremap <leader>nh :set hls!<CR> 
@@ -110,6 +110,10 @@ set incsearch
 
 "map jk to Esc
 inoremap jk <Esc>
+nnoremap <leader>o o<ESC>k 
+nnoremap <leader>O O<ESC>j 
+vnoremap <leader>o <ESC>o<ESC>k 
+vnoremap <leader>O o<ESC>O<ESC>j 
 
 "copy current line to system clipboard
 nnoremap <leader>yy "+yy
@@ -132,13 +136,13 @@ nnoremap <leader>nf :NERDTreeFind<cr>
 
 nnoremap g; :action JumpToLastChange<Enter>
 nnoremap g, :action JumpToNextChange<Enter>
-nnoremap gd :action GotoImplementation<CR>
-nnoremap gD :action GotoDeclaration<CR>
+nnoremap gD :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
 
 Plug 'easymotion/vim-easymotion'
 set easymotion
 map s <Plug>(easymotion-s)
-
+"Plug 'nerdtree'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-matchit'
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -158,6 +162,8 @@ map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>cm <Action>(ShowPopupMenu)
 map <leader>l <Action>(NextProjectWindow)
 map <leader>h <Action>(PreviousProjectWindow)
+map <C-j> <Action>(PreviousProjectWindow)
+map <C-k> <Action>(NextProjectWindow)
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action

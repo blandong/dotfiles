@@ -182,7 +182,10 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 #bind ,l to autosuggest-accept of zsh-autosuggestions plugin
 bindkey ',l' autosuggest-accept
 #https://github.com/zsh-users/zsh-autosuggestions/issues/265
-bindkey ',w' vi-forward-word
+# bindkey ',w' vi-forward-word
+# bindkey ',w' vi-forward-word-end
+bindkey ',w' vi-forward-blank-word
+# bindkey ',w' vi-forward-blank-word-end
 
 
 #substring history
