@@ -128,16 +128,35 @@ nnoremap <leader>dd "+dd
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
 
+#select text to encode and decode
+vnoremap <leader>en :% !base64<cr>
+vnoremap <leader>de :!base64 -d<cr> 
+
 set NERDTree
 nnoremap <leader>nf :NERDTreeFind<cr>
 
 "map to type number to buffer after ls command
 ":nnoremap <leadeols :ls<cr>:b
 
+"go to the current class definition
+nnoremap <leader>gc /public class<Cr>WW
+
 nnoremap g; :action JumpToLastChange<Enter>
 nnoremap g, :action JumpToNextChange<Enter>
 nnoremap gD :action GotoImplementation<CR>
 nnoremap gd :action GotoDeclaration<CR>
+
+"duplicate paragraph, add line before and after the paragraph
+nnoremap <leader>dp vipjy}p
+
+"duplicate method, the cursor needs to be moved to the method name by Ctrl+Shift+Up/Down
+nnoremap <leader>dm v]Mo{ypo<Esc>
+
+"select method, the cursor needs to be moved to the method name by Ctrl+Shift+Up/Down
+nnoremap <leader>sm v]Mo{
+
+"delete method, the cursor needs to be moved to the method name by Ctrl+Shift+Up/Down
+nnoremap <leader><leader>dm v]Mo{ddd
 
 Plug 'easymotion/vim-easymotion'
 set easymotion

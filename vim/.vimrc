@@ -10,6 +10,7 @@ set belloff=all
 set sessionoptions-=globals
 set sessionoptions-=localoptions
 set sessionoptions-=options
+ set linebreak
 
 #default leader is \, we change it to comma
 g:mapleader = "," # map leader 
@@ -126,10 +127,8 @@ au QuickFixCmdPost    l* ++nested lwindow
 # nnoremap <leader>t<leader> :tabnext
 # nnoremap <C-j> :tabprevious<CR>
 # nnoremap <C-k> :tabnext<CR>
-# nnoremap <C-1> 1gT
-# nnoremap <C-9> :tablast<CR>
 # nnoremap <leader>tn :tab ter<cr>
-nnoremap <C-t> :tablast<cr><C-w>:tab ter<cr>
+nnoremap <C-t> <C-w>:tab ter<cr><C-w>:tabmove $<cr>
 # nnoremap <C-H> 1gT
 nnoremap <C-h> :tabfirst<CR>
 nnoremap <C-l> :tablast<CR>
@@ -137,8 +136,8 @@ nnoremap <C-j> gT
 nnoremap <C-k> gt
 #close all tabs to the right
 # nnoremap <C-w> :.+1,$tabdo :tabc!<CR>
-nnoremap <C-[> :tabmove-1<CR>
-nnoremap <C-]> :tabmove+1<CR>
+nnoremap <leader>[ :tabmove-1<CR>
+nnoremap <leader>] :tabmove+1<CR>
 
 # tnoremap <leader>tn <C-w>:tab ter<cr>
 # tnoremap <leader>to <C-w>:tabonly!<cr>
@@ -146,16 +145,14 @@ nnoremap <C-]> :tabmove+1<CR>
 tnoremap <C-q> <C-w><C-c><cr>
 # :tnoremap <leader>gt <C-w>gt
 # :tnoremap <leader>gT <C-w>gT
-# tnoremap <C-1> <C-w>:tabfirst<CR>
-# tnoremap <C-9> <C-w>:tablast<CR>
-tnoremap <C-t> <C-w>:tablast<cr><C-w>:tab ter<cr>
+tnoremap <C-t> <C-w>:tab ter<cr><C-w>:tabmove $<cr>
 tnoremap <C-h> <C-w>:tabfirst<CR>
 tnoremap <C-l> <C-w>:tablast<CR>
 :tnoremap <C-j> <C-w>gT
 :tnoremap <C-k> <C-w>gt
 # tnoremap <C-w> <C-w>:.+1,$tabdo :tabc!<CR>
-tnoremap <C-[> <C-w>:tabmove-1<CR>
-tnoremap <C-]> <C-w>:tabmove+1<CR>
+ tnoremap <leader>[ <C-w>:tabmove-1<CR>
+ tnoremap <leader>] <C-w>:tabmove+1<CR>
 
 
 #map ,n in terminal mode to return to terminal normal mode
@@ -261,8 +258,9 @@ set ttyfast
 ##select text to encode
 :vnoremap <leader>ee  :!base64<cr>
 
-#select text to decode 
-:vnoremap <leader>dd :!base64 -d<cr> 
+#select text to encode and decode
+vnoremap <leader>en :% !base64<cr>
+vnoremap <leader>de :!base64 -d<cr> 
 
 #base64 encode and decode the whole file
 nnoremap <leader>en :% !base64<cr>
@@ -292,8 +290,7 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
 #map to type number to buffer after ls command 
-:nnoremap <leader>ls :ls<cr>:b
-
+nnoremap <leader>ls :ls<CR>:b
 #display history files and type q, then type number to open the file
 :nnoremap <leader>h :browse oldfiles<CR>
 
@@ -302,6 +299,9 @@ inoremap jk <Esc>
 
 nnoremap <leader>o o<ESC>k 
 nnoremap <leader>O O<ESC>j 
+
+"duplicate paragraph, add line before and after the paragraph
+nnoremap <leader>du vipjy}p
 
 # source $MYVIMRC reloads the saved $MYVIMRC
 :nmap <leader>s :source $MYVIMRC<cr>
@@ -325,13 +325,18 @@ nnoremap [l :lprevious <cr>
 # Disable default easymotion mappings
 g:EasyMotion_do_mapping = 0 
 
-nmap s <Plug>(easymotion-s)
+nnoremap s <Plug>(easymotion-s)
 #two characters search
 # nmap S <Plug>(easymotion-s2)
 
 #highlight yanked text in milliseconds
 g:highlightedyank_highlight_duration = 100
-   
+
+nnoremap <leader>ns :NERDTreeFocus<CR>
+nnoremap <leader>nn :NERDTree<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+
 #plugins
 plug#begin('~/.vim/plugged')    
 #Plug 'preservim/nerdtree'
@@ -350,6 +355,8 @@ Plug 'dbakker/vim-paragraph-motion'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-obsession'
 plug#end()
 
 colorscheme dracula
@@ -358,7 +365,6 @@ colorscheme dracula
 #  var c = nr2char(getchar(0))
 #  return (c =~ pat) ? '' : c
 #enddef
-
 
 #abbreviations
 :iab shebang #! /usr/bin/env bash

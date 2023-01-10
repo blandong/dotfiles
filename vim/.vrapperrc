@@ -22,6 +22,7 @@ vnoremap <leader>y "+y
 
 #copy current line to system clipboard
 nnoremap <leader>yy "+yy
+nnoremap <leader><leader>y :let @* = @"<CR>
 
 nnoremap <leader>o o<ESC>k
 nnoremap <leader>O O<ESC>j
